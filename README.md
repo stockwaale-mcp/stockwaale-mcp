@@ -1,7 +1,7 @@
 # Stockwaale MCP Client SDK
 
 [![PyPI Version](https://img.shields.io/pypi/v/stockwaale-mcp?color=blue&logo=python&logoColor=white)](https://pypi.org/project/stockwaale-mcp/)
-[![npm Scoped Version](https://img.shields.io/npm/v/@stockwaale/stockwaale-mcp?color=green&logo=npm&logoColor=white)](https://www.npmjs.com/package/@stockwaale/stockwaale-mcp)
+[![npm Version](https://img.shields.io/npm/v/stockwaale-mcp?color=green&logo=npm&logoColor=white)](https://www.npmjs.com/package/stockwaale-mcp)
 
 **Stockwaale** is a hosted intelligence and analytics layer for Indian equities. It exposes verified real-time and historical market context, technical indicators, news analysis, and regulatory checks through standard REST APIs and a remote **Model Context Protocol (MCP)** endpoint.
 
@@ -26,7 +26,7 @@ pip install stockwaale-mcp
 
 ### Node.js Client
 ```bash
-npm install @stockwaale/stockwaale-mcp
+npm install stockwaale-mcp
 ```
 
 ---
@@ -93,7 +93,7 @@ stockwaale-mcp price RELIANCE
 
 ### Programmatic Client
 ```javascript
-const { StockwaaleClient } = require("@stockwaale/stockwaale-mcp");
+const { StockwaaleClient } = require("stockwaale-mcp");
 
 // Initialize client
 const client = new StockwaaleClient({ apiKey: "sk_live_your_api_key_here" });
@@ -122,10 +122,10 @@ run();
 ### Command Line Interface (CLI)
 ```bash
 # Print server manifest
-npx @stockwaale/stockwaale-mcp manifest
+npx stockwaale-mcp manifest
 
 # Fetch a stock price
-npx @stockwaale/stockwaale-mcp price RELIANCE
+npx stockwaale-mcp price RELIANCE
 ```
 
 ---
