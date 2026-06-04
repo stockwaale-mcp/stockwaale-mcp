@@ -1,122 +1,164 @@
-# Stockwaale MCP
+# Stockwaale MCP Client SDK
 
-[![PyPI Version](https://img.shields.io/pypi/v/stockwaale-mcp?color=blue)](https://pypi.org/project/stockwaale-mcp/)
-[![npm Scoped Version](https://img.shields.io/npm/v/@stockwaale/stockwaale-mcp?color=green)](https://www.npmjs.com/package/@stockwaale/stockwaale-mcp)
+[![PyPI Version](https://img.shields.io/pypi/v/stockwaale-mcp?color=blue&logo=python&logoColor=white)](https://pypi.org/project/stockwaale-mcp/)
+[![npm Scoped Version](https://img.shields.io/npm/v/@stockwaale/stockwaale-mcp?color=green&logo=npm&logoColor=white)](https://www.npmjs.com/package/@stockwaale/stockwaale-mcp)
 
-Stockwaale is a hosted intelligence layer for Indian equities. It exposes verified market context through REST APIs and a remote Model Context Protocol endpoint for AI agents, builders, and research workflows.
+**Stockwaale** is a hosted intelligence and analytics layer for Indian equities. It exposes verified real-time and historical market context, technical indicators, news analysis, and regulatory checks through standard REST APIs and a remote **Model Context Protocol (MCP)** endpoint.
 
-The public PyPI and npm packages are thin clients. They do not contain the private FastAPI server, Lambda handler, MongoDB code, database credentials, or business deployment logic.
+This SDK provides lightweight Python and Node.js clients to interact with the Stockwaale platform.
 
-## Hosted Endpoints
+---
 
-- MCP Streamable HTTP: `https://api.stockwaale.com/mcp`
-- MCP SSE: `https://api.stockwaale.com/mcp/sse`
-- Discovery manifest: `https://api.stockwaale.com/.well-known/mcp.json`
-- Product site: `https://stockwaale.com`
+## 🌐 Hosted Endpoints
+- **Product & Dashboard**: [https://stockwaale.com](https://stockwaale.com)
+- **MCP Streamable HTTP Endpoint**: `https://api.stockwaale.com/mcp`
+- **MCP Server-Sent Events (SSE)**: `https://api.stockwaale.com/mcp/sse`
+- **Discovery Manifest**: `https://api.stockwaale.com/.well-known/mcp.json`
 
-## Install
+---
 
-Python:
+## 📦 Installation
 
+### Python Client
 ```bash
 pip install stockwaale-mcp
 ```
 
-Node.js:
-
+### Node.js Client
 ```bash
 npm install @stockwaale/stockwaale-mcp
 ```
 
-## Python Usage
+---
 
+## 🛠️ Features & Available Capabilities
+
+The Stockwaale client provides access to the following operations:
+1. **Price Retrieval**: Latest daily closing price, exchange, and token metadata.
+2. **OHLCV Data**: Historical daily and hourly candles.
+3. **Intraday Candles**: Real-time and historical intraday candles (1m to 1h timeframes).
+4. **Technical Indicators**: Precomputed and on-demand indicators (RSI, ATR, EMAs, SMAs, Volatility Z-Scores).
+5. **Market Regime Classification**: Volatility and trend categorization (e.g. Bullish Expansion, Consolidation).
+6. **Market News & Sentiment**: Aggregated headlines, sentiment scoring, and market impact analysis.
+7. **Adviser/Analyst Registry**: Search SEBI registered investment advisers and research analysts.
+8. **Compliance Checks**: Deterministic screening checks for financial publications/UI copy.
+
+---
+
+## 🐍 Python SDK Usage
+
+### Programmatic Client
 ```python
 from stockwaale import StockwaaleClient
 
-client = StockwaaleClient(api_key="sk_live_xxx")
-print(client.price("RELIANCE"))
-print(client.screen(regime="Bullish Expansion", min_rsi=55))
+# Initialize client (uses STOCKWAALE_API_KEY env var by default if api_key parameter is omitted)
+client = StockwaaleClient(api_key="sk_live_your_api_key_here")
+
+# 1. Fetch latest price
+price_info = client.price("RELIANCE")
+print(f"Reliance Price: {price_info['price']} ({price_info['exchange']})")
+
+# 2. Get technical indicators
+indicators = client.features("TCS")
+print(f"TCS RSI-14: {indicators['rsi14']}")
+
+# 3. Screen stocks based on technical criteria
+bullish_stocks = client.screen(regime="Bullish Expansion", min_rsi=55)
+print("Bullish Expansion Stocks:", [s['symbol'] for s in bullish_stocks])
+
+# 4. Compare multiple stocks side-by-side
+comparison = client.compare(symbols=["RELIANCE", "TCS", "INFY"])
+print("Comparison Matrix:", comparison)
 ```
 
-The client also reads:
-
+### Environment Variables
+You can customize the client using environment variables:
 ```bash
-export STOCKWAALE_API_KEY=sk_live_xxx
-export STOCKWAALE_BASE_URL=https://api.stockwaale.com
+export STOCKWAALE_API_KEY="sk_live_your_api_key_here"
+export STOCKWAALE_BASE_URL="https://api.stockwaale.com"
 ```
 
-CLI:
-
+### Command Line Interface (CLI)
 ```bash
+# Display server manifest
 stockwaale-mcp manifest
-stockwaale-mcp mcp-config
+
+# Fetch a stock price
 stockwaale-mcp price RELIANCE
 ```
 
-## Node.js Usage
+---
 
-```js
+## ☕ Node.js SDK Usage
+
+### Programmatic Client
+```javascript
 const { StockwaaleClient } = require("@stockwaale/stockwaale-mcp");
 
-const client = new StockwaaleClient({ apiKey: "sk_live_xxx" });
+// Initialize client
+const client = new StockwaaleClient({ apiKey: "sk_live_your_api_key_here" });
 
-async function main() {
-  console.log(await client.price("RELIANCE"));
-  console.log(await client.screen({ regime: "Bullish Expansion", min_rsi: 55 }));
+async function run() {
+  try {
+    // 1. Fetch latest price
+    const priceInfo = await client.price("RELIANCE");
+    console.log(`Reliance Price: ${priceInfo.price}`);
+
+    // 2. Query technical indicators
+    const indicators = await client.features("TCS");
+    console.log(`TCS RSI-14: ${indicators.rsi14}`);
+
+    // 3. Screen stocks
+    const bullishStocks = await client.screen({ regime: "Bullish Expansion", minRsi: 55 });
+    console.log("Bullish Stocks:", bullishStocks.map(s => s.symbol));
+  } catch (error) {
+    console.error("Error communicating with Stockwaale:", error);
+  }
 }
 
-main();
+run();
 ```
 
-CLI:
-
+### Command Line Interface (CLI)
 ```bash
+# Print server manifest
 npx @stockwaale/stockwaale-mcp manifest
-npx @stockwaale/stockwaale-mcp mcp-config
+
+# Fetch a stock price
 npx @stockwaale/stockwaale-mcp price RELIANCE
 ```
 
-## MCP Client Config
+---
 
-Use the hosted remote endpoint from Claude Desktop, Cursor, VS Code extensions, or any MCP client that supports Streamable HTTP:
+## 🤖 Model Context Protocol (MCP) Setup
+
+You can connect Stockwaale's intelligence layer directly to AI assistants like Claude Desktop, Cursor, or VS Code Extensions.
+
+### Claude Desktop Configuration
+Add the server configuration to your `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "stockwaale": {
       "http": {
-        "url": "https://api.stockwaale.com/mcp"
+        "url": "https://api.stockwaale.com/mcp",
+        "headers": {
+          "Authorization": "Bearer sk_live_your_api_key_here"
+        }
       }
     }
   }
 }
 ```
 
-For protected plans, send the API key as `Authorization: Bearer <key>` or `X-API-Key: <key>` where the client supports custom headers.
+*Note: For platforms or LLM clients that do not support custom request headers, you can pass your API key via query parameter (if supported by your client proxy) or configure client-side environment variables.*
 
-## API Keys
+---
 
-Do not publish fixed API keys in package code, README examples, GitHub, PyPI, or npm.
+## 🛡️ Terms & Compliance
 
-Production API keys are created per user or organization in the hosted backend after Firebase login. The free plan defaults to 50 API calls per day. Keys are stored hashed in the database and shown only once at creation time.
+Stockwaale provides market data context, statistical analyses, and regulatory registry lookups for educational and research purposes.
 
-Fixed keys in `STOCKWAALE_API_KEYS` are only for admin/test bootstrap access and private smoke checks. They should not be customer keys.
-
-Lambda environment variables or AWS Secrets Manager should hold platform secrets such as MongoDB credentials, Firebase service-account configuration, JWT signing secrets, webhook secrets, and bootstrap admin credentials.
-
-## Private Deployment Boundary
-
-The private Lambda deployment can include:
-
-- `lambda_handler.py`
-- FastAPI application code
-- MCP server implementation
-- MongoDB integration
-- AWS Secrets Manager integration
-- CloudFront and Lambda deployment templates
-
-Those files should stay in a private repository or private deployment artifact. PyPI and npm package artifacts should ship only the public clients and documentation needed by customers.
-
-## Compliance
-
-Stockwaale provides market data context, derived indicators, and research infrastructure. It does not provide investment advice, guaranteed returns, financial planning, stock tips, or SEBI-registered advisory services.
+> [!WARNING]
+> Stockwaale does **not** provide investment advice, buy/sell recommendations, financial planning, or SEBI-registered portfolio advisory services. All research and data are provided "as-is" without warranty.
