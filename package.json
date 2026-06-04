@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stockwaale/stockwaale-mcp.git"
+    "url": "git+https://github.com/stockwaale-mcp/stockwaale-mcp.git"
   },
   "keywords": [
     "mcp",
@@ -33,7 +33,7 @@
   "author": "StockIntel India <info@stockwaale.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stockwaale/stockwaale-mcp/issues"
+    "url": "https://github.com/stockwaale-mcp/stockwaale-mcp/issues"
   },
   "homepage": "https://stockwaale.com",
   "dependencies": {}

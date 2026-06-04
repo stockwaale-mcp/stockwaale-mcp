@@ -13,7 +13,7 @@ keywords = ["mcp", "stockwaale", "indian-stocks", "nse", "bse", "api-client"]
 authors = [
     { name = "StockIntel India", email = "info@stockwaale.com" }
 ]
-urls = { Homepage = "https://stockwaale.com", Repository = "https://github.com/stockwaale/stockwaale-mcp", Documentation = "https://stockwaale.com/api-reference" }
+urls = { Homepage = "https://stockwaale.com", Repository = "https://github.com/stockwaale-mcp/stockwaale-mcp", Documentation = "https://stockwaale.com/api-reference" }
 dependencies = []
 
 [project.scripts]
