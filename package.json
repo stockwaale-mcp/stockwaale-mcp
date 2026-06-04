@@ -1,10 +1,10 @@
 {
-  "name": "@stockwaale/stockwaale-mcp",
+  "name": "stockwaale-mcp",
   "version": "1.0.0",
   "description": "Public JavaScript client for the hosted Stockwaale Indian equities intelligence API and MCP endpoint",
   "main": "index.js",
   "bin": {
-    "stockwaale-mcp": "./bin/cli.js"
+    "stockwaale-mcp": "bin/cli.js"
   },
   "scripts": {
     "start": "node ./bin/cli.js manifest",
