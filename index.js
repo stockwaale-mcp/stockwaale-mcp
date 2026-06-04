@@ -1,6 +1,6 @@
 "use strict";
 
-const DEFAULT_BASE_URL = "https://api.stockwaale.com";
+const DEFAULT_BASE_URL = "https://stockwaale.com";
 
 class StockwaaleClient {
   constructor(options = {}) {

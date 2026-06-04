@@ -5,7 +5,7 @@ from urllib.error import HTTPError
 from urllib.parse import urlencode, urljoin
 from urllib.request import Request, urlopen
 
-DEFAULT_BASE_URL = "https://api.stockwaale.com"
+DEFAULT_BASE_URL = "https://stockwaale.com"
 MCP_ENDPOINTS = {
     "streamable_http": "/mcp",
     "sse": "/mcp/sse",
