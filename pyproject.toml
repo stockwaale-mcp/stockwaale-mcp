@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stockwaale-mcp"
+version = "1.0.0"
+description = "Public Python client for the hosted Stockwaale Indian equities intelligence API and MCP endpoint"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["mcp", "stockwaale", "indian-stocks", "nse", "bse", "api-client"]
+authors = [
+    { name = "StockIntel India", email = "info@stockwaale.com" }
+]
+urls = { Homepage = "https://stockwaale.com", Repository = "https://github.com/stockwaale/stockwaale-mcp", Documentation = "https://stockwaale.com/api-reference" }
+dependencies = []
+
+[project.scripts]
+stockwaale-mcp = "stockwaale.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["stockwaale"]
+
+[tool.hatch.build.targets.sdist]
+only-include = ["README.md", "pyproject.toml", "stockwaale"]
+exclude = [
+    "/.gitignore",
+    "/.env",
+    "/.env.*",
+    "/.venv",
+    "/archive",
+    "/bin",
+    "/deploy",
+    "/dist",
+    "/docs",
+    "/index.html",
+    "/lambda_handler.py",
+    "/main.py",
+    "/node_modules",
+    "/package.json",
+    "/requirements.txt",
+    "/static",
+    "/stockwaale_mcp",
+    "/tests",
+    "/__pycache__",
+    "/.pytest_cache",
+    "/final_verification.png",
+    "*.bak",
+]

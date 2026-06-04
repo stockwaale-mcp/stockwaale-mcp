@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "stockwaale": {
+      "http": {
+        "url": "https://api.stockwaale.com/mcp"
+      }
+    }
+  }
+}

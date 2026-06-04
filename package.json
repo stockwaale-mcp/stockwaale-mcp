@@ -1,0 +1,40 @@
+{
+  "name": "@stockwaale/stockwaale-mcp",
+  "version": "1.0.0",
+  "description": "Public JavaScript client for the hosted Stockwaale Indian equities intelligence API and MCP endpoint",
+  "main": "index.js",
+  "bin": {
+    "stockwaale-mcp": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node ./bin/cli.js manifest",
+    "pack:check": "npm pack --dry-run"
+  },
+  "files": [
+    "README.md",
+    "index.js",
+    "bin/"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stockwaale/stockwaale-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "stockwaale",
+    "indian-stocks",
+    "nse",
+    "bse",
+    "api-client"
+  ],
+  "author": "StockIntel India <info@stockwaale.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stockwaale/stockwaale-mcp/issues"
+  },
+  "homepage": "https://stockwaale.com",
+  "dependencies": {}
+}
